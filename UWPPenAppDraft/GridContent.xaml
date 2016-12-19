@@ -6,7 +6,27 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <SolidColorBrush x:Name="GRAYBRUSH" x:Key="GRAYBRUSH" Color="Gray"/>
+        <SolidColorBrush x:Name="TRANSPARENTBRUSH" x:Key="TRANSPARENTBRUSH" Color="Transparent"/>
+        
+        <Style TargetType="Rectangle" x:Name="RECTANGLE_STYLE" x:Key="RECTANGLE_STYLE">
+            <Setter Property="Fill" Value= "Transparent"/>
+            <Setter Property="Stroke" Value="Gray"/>
+            <Setter Property="StrokeThickness" Value="0.5"/>
+            <Setter Property="Margin" Value="-2,-2,-2,-2"/>
 
+            <!--<Setter Property="StrokeDashArray" Value="5"/>-->
+        </Style>
+
+        <Style TargetType="Button" x:Name="BUTTON_STYLE_ARROW" x:Key="BUTTON_STYLE_ARROW">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Content" Value="&#xEDE1;"/>
+        </Style>
+        
+    </Page.Resources>
+    
     <Grid AllowDrop="True" DragOver="PageGrid_DragOver" Drop="PageGrid_Drop" PointerEntered="PageGrid_PointerEntered" Name="PageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
 
             <!--<TextBox Name="mainTextBox" Text="안녕하세요" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="30"></TextBox>-->

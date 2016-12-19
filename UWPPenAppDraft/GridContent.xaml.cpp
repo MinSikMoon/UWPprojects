@@ -27,36 +27,15 @@ GridContent::GridContent()
 }
 void  UWPPenAppDraft::GridContent::Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	makeGridArray(50, 50, 100);
-	////1. 8개의 행을 그린다. 
-	//for (int i = 0; i < 8; i++) {
-	//	RowDefinition^ tempRow = ref new RowDefinition();
-	//	tempRow->Height = 100;
-	//	PageGrid->RowDefinitions->Append(tempRow);
-	//}
-
-	////2. 8개의 열을 그린다. 
-	//for (int i = 0; i < 8; i++) {
-	//	ColumnDefinition^ tempColumn = ref new ColumnDefinition();
-	//	tempColumn->Width = 100;
-	//	PageGrid->ColumnDefinitions->Append(tempColumn);
-	//}
-
-	////3. rectangle을 채워넣어본다. 
-	//for (int i = 0; i < 8; i++) {
-	//	for (int j = 0; j < 8; j++) {
-	//		//1. rectangle 채우기 
-	//		makeRectangle(PageGrid, 100, 100, i, j);
-	//	}
-	//}
+	makeGridArray(10, 10, 100, 70);
 
 }
 
-void UWPPenAppDraft::GridContent::makeGridArray(int rowNum, int columnNum, int rectWidth) {
+void UWPPenAppDraft::GridContent::makeGridArray(int rowNum, int columnNum, int rectWidth, int rectHeight) {
 	//1. 8개의 행을 그린다. 
 	for (int i = 0; i < rowNum; i++) {
 		RowDefinition^ tempRow = ref new RowDefinition();
-		tempRow->Height = rectWidth;
+		tempRow->Height = rectHeight;
 		PageGrid->RowDefinitions->Append(tempRow);
 	}
 
@@ -71,47 +50,27 @@ void UWPPenAppDraft::GridContent::makeGridArray(int rowNum, int columnNum, int r
 	for (int i = 0; i < rowNum; i++) {
 		for (int j = 0; j < columnNum; j++) {
 			//1. rectangle 채우기 
-			makeRectangle(PageGrid, rectWidth, rectWidth, i, j);
+			makeRectangle(PageGrid, rectWidth, rectHeight, i, j);
 		}
 	}
 }
 void UWPPenAppDraft::GridContent::makeButton(Grid^ parentGrid, int horizontal, int vertical, int width, int height, int rowIdx, int columnIdx) {
 	Button^ tempButton = ref new Button();
-	tempButton->SetValue(HorizontalAlignmentProperty, horizontal);
-	tempButton->SetValue(VerticalAlignmentProperty, vertical);
-	tempButton->Padding = 0;
+	tempButton->Style = BUTTON_STYLE_ARROW;
 	tempButton->Width = width;
 	tempButton->Height = height;
 	tempButton->SetValue(PageGrid->ColumnProperty, columnIdx);
 	tempButton->SetValue(PageGrid->RowProperty, rowIdx);
-
-	//tempButton->SetValue(this->VisibilityProperty, 0);
+	tempButton->SetValue(HorizontalAlignmentProperty, horizontal);
+	tempButton->SetValue(VerticalAlignmentProperty, vertical);
 	parentGrid->Children->Append(tempButton);
 }
 
 void  UWPPenAppDraft::GridContent::makeRectangle(Grid^ parentGrid, int width, int height, int rowIdx, int columnIdx) {
-	/*Rectangle^ tempRect = ref new Rectangle();
-	tempRect->Height = width;
-	tempRect->Width = height;
-	tempRect->StrokeThickness = 1;
-	tempRect->Stroke = ref new SolidColorBrush(Windows::UI::Colors::Gray);
-	tempRect->Fill = ref new SolidColorBrush(Windows::UI::Colors::Transparent);
-	tempRect->SetValue(PageGrid->ColumnProperty, columnIdx);
-	tempRect->SetValue(PageGrid->RowProperty, rowIdx);
-	tempRect->AllowDrop = true;
-	tempRect->Drop += ref new Windows::UI::Xaml::DragEventHandler(this, &UWPPenAppDraft::GridContent::Rectangle_Drop);
-	tempRect->PointerEntered += ref new Windows::UI::Xaml::Input::PointerEventHandler(this, &UWPPenAppDraft::GridContent::Rectangle_PointerEntered);
-	tempRect->PointerPressed += ref new Windows::UI::Xaml::Input::PointerEventHandler(this, &UWPPenAppDraft::GridContent::Rectangle_PointerPressed);
-	tempRect->PointerReleased += ref new Windows::UI::Xaml::Input::PointerEventHandler(this, &UWPPenAppDraft::GridContent::Rectangle_PointerReleased);
-	tempRect->DragEnter += ref new Windows::UI::Xaml::DragEventHandler(this, &UWPPenAppDraft::GridContent::Rectangle_DragEnter);
-	parentGrid->Children->Append(tempRect);*/
-
 	Rectangle^ tempRect = ref new Rectangle();
-	tempRect->Height = width;
-	tempRect->Width = height;
-	tempRect->StrokeThickness = 0.5;
-	tempRect->Stroke = ref new SolidColorBrush(Windows::UI::Colors::Gray);
-	tempRect->Fill = ref new SolidColorBrush(Windows::UI::Colors::Transparent);
+	tempRect->Height = height;
+	tempRect->Width = width;
+	tempRect->Style = RECTANGLE_STYLE;
 	auto dasharray = ref new DoubleCollection;
 	dasharray->Append(5);
 	tempRect->StrokeDashArray = dasharray;
