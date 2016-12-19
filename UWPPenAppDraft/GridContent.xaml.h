@@ -28,14 +28,13 @@ namespace UWPPenAppDraft
 	{
 	public:
 		GridContent();
-
-
 	private:
 		int curRowIdx, curColumnIdx;
 		
 		void makeButton(Grid^ parentGrid, int horizontal, int vertical, int width, int height, int rowIdx, int columnIdx);
 		void makeRectangle(Grid^ parentGrid, int width, int height, int rowIdx, int columnIdx);
 		void makeGridArray(int rowNum, int columnNum, int rectWidth, int rectHeight);
+		void makeImage(Grid^ parentGrid,  int rowIdx, int columnIdx);
 
 		void Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Rectangle_PointerPressed(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
@@ -47,8 +46,9 @@ namespace UWPPenAppDraft
 		void Rectangle_DragEnter(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e);
 		void PageGrid_PointerEntered(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
 		void Rectangle_Drop(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e);
-		
 	};
 
+	
+	
 	
 }

@@ -23,8 +23,23 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="Content" Value="&#xEDE1;"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
         </Style>
         
+        <!--<Style TargetType="Button" x:Name="BUTTON_STYLE_MEMO" x:Key="BUTTON_STYLE_MEMO">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Content" Value="&#xEC42;"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>-->
+
+        <Style TargetType="Image" x:Name="TEST_IMAGE" x:Key="TEST_IMAGE">
+            <Setter Property="Source" Value="Assets/circle.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
     </Page.Resources>
     
     <Grid AllowDrop="True" DragOver="PageGrid_DragOver" Drop="PageGrid_Drop" PointerEntered="PageGrid_PointerEntered" Name="PageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >

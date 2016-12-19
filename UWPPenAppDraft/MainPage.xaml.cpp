@@ -6,7 +6,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "GridContent.xaml.h"
-
+#include "GridElem.xaml.h"
 using namespace UWPPenAppDraft;
 
 using namespace Platform;
