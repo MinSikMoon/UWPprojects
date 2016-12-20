@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="flowchart.GridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:flowchart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <!--그리드 안에서 쓰일 재료들 스타일 정리-->
+    <Page.Resources>
+        <!--이벤트를 받아줄 투명 Rectangle 스타일 -->
+        <Style TargetType="Rectangle" x:Name="RECTANGLE_STYLE" x:Key="RECTANGLE_STYLE">
+            <Setter Property="Fill" Value= "Transparent"/>
+            <Setter Property="Stroke" Value="Gray"/>
+            <Setter Property="StrokeThickness" Value="0.5"/>
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="70" />
+        </Style>
+        
+        <!--버튼 스타일들: 위치는 이걸로 안먹혀서 코드단에서 생성해줘야됨.-->
+        <!--1. 연결선 버튼 스타일-->
+        <Style TargetType="Button" x:Name="BUTTON_STYLE_CONNECTOR" x:Key="BUTTON_STYLE_CONNECTOR">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Content" Value="&#xEB97;"/>
+        </Style>
+        <!--2. 내용 버튼 스타일-->
+        <Style TargetType="Button" x:Name="BUTTON_STYLE_CONTENTS" x:Key="BUTTON_STYLE_CONTENTS">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Content" Value="&#xEC42;"/>
+        </Style>
+        <!--1. 기능 버튼 스타일-->
+        <Style TargetType="Button" x:Name="BUTTON_STYLE_FUCTION" x:Key="BUTTON_STYLE_FUNCTION">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Content" Value="&#xEB7E;"/>
+        </Style>
+        
+        <!--도형별 이미지 스타일 6개-->
+        <Style TargetType="Image" x:Name="IMAGE_PROCESS" x:Key="IMAGE_PROCESS">
+            <Setter Property="Source" Value="Assets/one.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Name="IMAGE_DECISION" x:Key="IMAGE_DECISION">
+            <Setter Property="Source" Value="Assets/two.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Name="IMAGE_PREPARATION" x:Key="IMAGE_PREPARATION">
+            <Setter Property="Source" Value="Assets/three.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Name="IMAGE_TERMINATOR" x:Key="IMAGE_TERMINATOR">
+            <Setter Property="Source" Value="Assets/four.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Name="IMAGE_DATA" x:Key="IMAGE_DATA">
+            <Setter Property="Source" Value="Assets/five.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+        <Style TargetType="Image" x:Name="IMAGE_DOCUMENT" x:Key="IMAGE_DOCUMENT">
+            <Setter Property="Source" Value="Assets/six.png"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+    </Page.Resources>
+    
+    
+    
+    <!--루트 그리드 : 이 안에 동적으로 그리드가 생성된다. -->
+    <Grid Name="RootGrid" AllowDrop="true" DragOver="RootGrid_DragOver" Drop="RootGrid_Drop" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--<Rectangle PointerEntered="Rectangle_PointerEntered" DragEnter="Rectangle_DragEnter"></Rectangle>-->
+        <TextBox Name="gridCheck" Width="100" Height="50"></TextBox>
+        <TextBox Name="symbolCheck" Width="100" Height="50" Grid.Row="0" Grid.Column="1"></TextBox>
+    </Grid>
+
+   
+</Page>
