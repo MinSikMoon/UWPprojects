@@ -16,8 +16,12 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Xaml::Shapes;
 using namespace Windows::UI;
+
+
 #include "GridPage.g.h"
 #include <String>
+#include <list>
+#include "SymbolInfo.h"
 namespace flowchart
 {
 	/// <summary>
@@ -38,15 +42,21 @@ namespace flowchart
 		int curRowIndex;
 		int curColumnIndex;
 		int selectedSymbolNumber;
+		std::list<SymbolInfo^> symbolList;
+
+		void makeImage(Grid^ parentGrid, int symbolType, int rowIndex, int columnIndex);
+		void showAllSymbols();
 
 		void Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Rectangle_PointerEntered(Platform::Object^ sender, Windows::UI::Xaml::Input::PointerRoutedEventArgs^ e);
-	protected:
-		 void OnNavigatedTo(NavigationEventArgs^ e) override;
-
-	private:
 		void RootGrid_DragOver(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e);
 		void RootGrid_Drop(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e);
 		void Rectangle_DragEnter(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e);
+
+	protected:
+		 void OnNavigatedTo(NavigationEventArgs^ e) override;
+
+	
+		
 	};
 }

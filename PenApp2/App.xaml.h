@@ -19,7 +19,7 @@ namespace flowchart
 
 	internal:
 		App();
-
+		static int selectedSymbolNum;
 	private:
 		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
 		void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);

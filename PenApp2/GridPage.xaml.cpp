@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "GridPage.xaml.h"
 #include "MainPage.xaml.h"
+
 using namespace flowchart;
 
 using namespace Platform;
@@ -67,7 +68,7 @@ void GridPage::makeRectangle(Grid^ parentGrid, int rowIndex, int columnIndex)
 	tempRect->SetValue(parentGrid->ColumnProperty, columnIndex);
 	tempRect->SetValue(parentGrid->RowProperty, rowIndex);
 	tempRect->AllowDrop = true;
-
+	
 	tempRect->PointerEntered += ref new Windows::UI::Xaml::Input::PointerEventHandler(this, &flowchart::GridPage::Rectangle_PointerEntered);
 	tempRect->DragEnter += ref new Windows::UI::Xaml::DragEventHandler(this, &flowchart::GridPage::Rectangle_DragEnter);
 	parentGrid->Children->Append(tempRect);
@@ -84,6 +85,44 @@ void flowchart::GridPage::Rectangle_PointerEntered(Platform::Object^ sender, Win
 	gridCheck->Text = curRowIndex + ", " + curColumnIndex;
 	
 	//symbolCheck->Text = Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(MainPage::typeid));
+}
+
+void flowchart::GridPage::makeImage(Grid^ parentGrid, int symbolType, int rowIndex, int columnIndex)
+{
+	Image^ tempImage = ref new Image();
+	tempImage->SetValue(parentGrid->RowProperty, curRowIndex);
+	tempImage->SetValue(parentGrid->ColumnProperty, curColumnIndex);
+	tempImage->Style = IMAGE_PROCESS;
+	/*switch (symbolType) {
+	case SymbolType::process: 
+		tempImage->Style = IMAGE_PROCESS;
+		break;
+	case SymbolType::decision:
+		tempImage->Style = IMAGE_DECISION;
+		break;
+	case SymbolType::preparation:
+		tempImage->Style = IMAGE_PREPARATION;
+		break;
+	case SymbolType::terminator:
+		tempImage->Style = IMAGE_TERMINATOR;
+		break;
+	case SymbolType::data:
+		tempImage->Style = IMAGE_DATA;
+		break;
+	case SymbolType::document:
+		tempImage->Style = IMAGE_DOCUMENT;
+		break;
+	default:
+		tempImage->Style = IMAGE_PROCESS;
+	}*/
+	Button^ tempButton = ref new Button();
+	tempButton->Width = 20;
+	tempButton->Height = 20;
+	tempButton->SetValue(parentGrid->RowProperty, curRowIndex);
+	tempButton->SetValue(parentGrid->ColumnProperty, curColumnIndex);
+	parentGrid->Children->Append(tempButton);
+	parentGrid->Children->Append(tempImage);
+	
 }
 
 void flowchart::GridPage::Rectangle_DragEnter(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e)
@@ -107,15 +146,30 @@ void flowchart::GridPage::OnNavigatedTo(NavigationEventArgs^ e)
 
 void flowchart::GridPage::RootGrid_DragOver(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e)
 {
-	e->AcceptedOperation = DataPackageOperation::Move;
+	e->AcceptedOperation = DataPackageOperation::Copy;
 	e->DragUIOverride->Caption = "생성하기";
 	e->DragUIOverride->IsGlyphVisible = true;
 }
 
 
+// 마우스에서 손을 뗄 떼: 리스트 symbolInfo가 하나 만들어 지고 리스트에 추가 
 void flowchart::GridPage::RootGrid_Drop(Platform::Object^ sender, Windows::UI::Xaml::DragEventArgs^ e)
 {
+	makeImage(RootGrid, 2, curRowIndex, curColumnIndex);
+	/*symbolList.push_back(ref new SymbolInfo(1, 2, curRowIndex, curColumnIndex));
+	showAllSymbols();*/
+	RootGrid->UpdateLayout();
+	symbolCheck->Text = "" + "드롭됨";
+}
 
+void flowchart::GridPage::showAllSymbols()
+{
+	std::list<SymbolInfo^>::iterator itr;
+
+	for (itr = symbolList.begin(); itr != symbolList.end(); itr++) {
+		SymbolInfo^ tempSymbolInfo = *itr;
+		makeImage(RootGrid, tempSymbolInfo->getSymbolType(), tempSymbolInfo->getRowIndex(), tempSymbolInfo->getColumnIndex());
+	}
 }
 
 
@@ -139,7 +193,7 @@ void flowchart::GridPage::RootGrid_Drop(Platform::Object^ sender, Windows::UI::X
 //안쓰는 메소드들 
 void flowchart::GridPage::Page_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
+	
 }
 
 
